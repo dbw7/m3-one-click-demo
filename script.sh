@@ -21,8 +21,8 @@ fi
 source ~/.bashrc
 
 #create ansible directory in the home directory if it doesn't exist
-if [ ! -d /home/root/ansible ]; then
-  mkdir -p /home/root/ansible;
+if [ ! -d ~/ansible ]; then
+  mkdir -p ~/ansible;
 fi
 
 #put the equinix playbook in the ansible folder
