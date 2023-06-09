@@ -29,6 +29,6 @@ fi
 curl https://raw.githubusercontent.com/dbw7/m3-one-click-demo/main/equinix-playbook.yaml > ~/ansible/equinix-playbook.yaml
 
 #put the extra vars file in the ansible directory temporarily
-curl https://raw.githubusercontent.com/dbw7/m3-one-click-demo/main/equinix-playbook.yaml > ~/ansible/equinix-playbook.yaml
+curl https://raw.githubusercontent.com/dbw7/m3-one-click-demo/main/extra_vars.yml > ~/ansible/extra_vars.yml
 
 ansible-playbook ~/ansible/equinix-playbook.yaml -v
