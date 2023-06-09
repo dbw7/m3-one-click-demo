@@ -1,0 +1,107 @@
+---
+- name: Equinix Setup
+  hosts: localhost
+  become: true
+  tasks:
+      #Ignore this due to the comment below
+    - name: Update apt
+      apt: 
+        upgrade: full 
+        force_apt_get: yes 
+        update_cache: yes
+      when: false
+      #Gonna keep this disabled for now as the shell script already does this
+      
+    - name: Install git
+      apt: 
+        name: git
+        state: present
+      #when: false
+      
+    - name: create m3-demo directory
+      file:
+        path: "{{ ansible_env.HOME }}/m3-demo-parent"
+        state: directory
+      #when: false
+    
+    - name: Clone m3-demo repo
+      shell: git clone https://github.com/suse-edge/metal3-demo
+      args:
+        chdir: "{{ ansible_env.HOME }}/m3-demo-parent"
+      #when: false
+    
+    - name: Copy extra_vars_.yml.example to extra_vars.yml
+      copy:
+        src: "{{ ansible_env.HOME }}/m3-demo-parent/metal3-demo/extra_vars.yml.example"
+        dest: "{{ ansible_env.HOME }}/m3-demo-parent/metal3-demo/extra_vars.yml"
+    
+    - name: Replace baremetal repo url
+      ansible.builtin.lineinfile:
+        path: "{{ item }}"
+        regexp: '^\s*baremetal_repo_url:'
+        #line: 'baremetal_repo_url: https://github.com/guangyee/baremetal.git'
+        line: 'baremetal_repo_url: https://github.com/dbw7/charts.git'
+      loop:
+        - "{{ ansible_env.HOME }}/m3-demo-parent/metal3-demo/roles/baremetal/defaults/main.yml"
+        - "{{ ansible_env.HOME }}/m3-demo-parent/metal3-demo/roles/dnsmasq/defaults/main.yml"
+        - "{{ ansible_env.HOME }}/m3-demo-parent/metal3-demo/roles/media/defaults/main.yml" 
+        - "{{ ansible_env.HOME }}/m3-demo-parent/metal3-demo/roles/powerdns/defaults/main.yml"
+        
+    - name: Replace baremetal repo branch
+      ansible.builtin.lineinfile:
+        path: "{{ item }}"
+        regexp: '^\s*baremetal_branch:'
+        #line: 'baremetal_branch: pvc_for_ironic_only'
+        line: 'baremetal_branch: main'
+      loop:
+        - "{{ ansible_env.HOME }}/m3-demo-parent/metal3-demo/roles/baremetal/defaults/main.yml"
+        - "{{ ansible_env.HOME }}/m3-demo-parent/metal3-demo/roles/dnsmasq/defaults/main.yml"
+        - "{{ ansible_env.HOME }}/m3-demo-parent/metal3-demo/roles/media/defaults/main.yml" 
+        - "{{ ansible_env.HOME }}/m3-demo-parent/metal3-demo/roles/powerdns/defaults/main.yml"
+        
+    - name: Install Dependencies
+      apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      with_items:
+        - libvirt-clients
+        - qemu-kvm
+        - libvirt-daemon-system
+        - python3-pip
+        - pkg-config
+        - libvirt-dev # not sure about this one either
+        - mkisofs
+        - qemu # this may not be needed
+        - virtinst
+        - qemu-efi
+        - sshpass
+      #when: false
+      
+    - name: Install ansible galaxy collections
+      command:
+        cmd: ansible-galaxy collection install -r requirements.yml
+        chdir: "{{ ansible_env.HOME }}/m3-demo-parent/metal3-demo"
+      become: yes
+      #when: false
+      
+    - name: Install libvirt-python
+      ansible.builtin.pip:
+        name: libvirt-python
+        executable: pip3
+        
+    - name: Define egress
+      become: yes
+      command: virsh net-define "{{ ansible_env.HOME }}/m3-demo-parent/metal3-demo/libvirt/egress.xml"
+
+    - name: Start egress
+      become: yes
+      command: virsh net-start egress
+      
+    - name: Define egress
+      become: yes
+      command: virsh net-define "{{ ansible_env.HOME }}/m3-demo-parent/metal3-demo/libvirt/provisioning.xml"
+
+    - name: Start egress
+      become: yes
+      command: virsh net-start provisioning
