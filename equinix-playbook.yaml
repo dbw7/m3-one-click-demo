@@ -105,3 +105,19 @@
     - name: Start egress
       become: yes
       command: virsh net-start provisioning
+      
+      
+      #Replace OS Optimizations because ubuntu is really good and well updated thank you Ubuntu
+    - name: Replace OS Optimizations 1
+      ansible.builtin.lineinfile:
+        path: "{{ ansible_env.HOME }}/m3-demo-parent/metal3-demo/roles/vm/defaults/main.yml"
+        regexp: '^\s*cloud_image_os_name: opensuse15.4'
+        #line: 'baremetal_branch: pvc_for_ironic_only'
+        line: 'cloud_image_os_name: opensuse15.3'
+        
+    - name: Replace OS Optimizations 2
+      ansible.builtin.lineinfile:
+        path: "{{ ansible_env.HOME }}/m3-demo-parent/metal3-demo/roles/vm/defaults/main.yml"
+        regexp: '^\s*vm_os_variant: opensuse15.4'
+        #line: 'baremetal_branch: pvc_for_ironic_only'
+        line: 'vm_os_variant: opensuse15.3'
