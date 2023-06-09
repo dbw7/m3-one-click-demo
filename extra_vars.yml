@@ -18,7 +18,7 @@ vm_user_plain_text_password: metal
 # here will be appended to the VM user's authorized_keys file.
 #
 vm_authorized_ssh_keys:
- - 
+ -YOU CAN REPLACE THIS BUT THE SCRIPT WILL CHANGE THIS AUTOMATICALLY 
  
 rke2_channel_version: v1.24
 

@@ -31,4 +31,18 @@ curl https://raw.githubusercontent.com/dbw7/m3-one-click-demo/main/equinix-playb
 #put the extra vars file in the ansible directory temporarily
 curl https://raw.githubusercontent.com/dbw7/m3-one-click-demo/main/extra_vars.yml > ~/ansible/extra_vars.yml
 
+#generate ssh key to use to log into the metal-cubed servers
+ssh-keygen -t ed25519 -C "m3-equinix-server" -f ~/.ssh/id_rsa -N ""
+
+#take that key and put it in extra_vars.yml
+PUBLIC_KEY_FILE="$HOME/.ssh/id_rsa.pub"
+PUBLIC_KEY=$(cat "$PUBLIC_KEY_FILE")
+
+SEARCH_STRING="-YOU CAN REPLACE THIS BUT THE SCRIPT WILL CHANGE THIS AUTOMATICALLY"
+REPLACE_STRING="- $PUBLIC_KEY"
+
+perl -i -pe "s|$SEARCH_STRING|$REPLACE_STRING|" ~/ansible/extra_vars.yml
+
+
+#Run the playbook with the verbose flag
 ansible-playbook ~/ansible/equinix-playbook.yaml -v
