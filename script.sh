@@ -20,9 +20,15 @@ fi
 # Source bashrc to load new PATH
 source ~/.bashrc
 
-
+#create ansible directory in the home directory if it doesn't exist
 if [ ! -d /home/root/ansible ]; then
   mkdir -p /home/root/ansible;
 fi
 
-ansible-playbook ./ansible/equinix-playbook.yaml -v
+#put the equinix playbook in the ansible folder
+curl https://raw.githubusercontent.com/dbw7/m3-one-click-demo/main/equinix-playbook.yaml > ~/ansible/equinix-playbook.yaml
+
+#put the extra vars file in the ansible directory temporarily
+curl https://raw.githubusercontent.com/dbw7/m3-one-click-demo/main/equinix-playbook.yaml > ~/ansible/equinix-playbook.yaml
+
+ansible-playbook ~/ansible/equinix-playbook.yaml -v

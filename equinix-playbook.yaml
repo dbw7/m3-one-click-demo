@@ -32,7 +32,7 @@
     
     - name: Copy extra_vars_.yml.example to extra_vars.yml
       copy:
-        src: "{{ ansible_env.HOME }}/m3-demo-parent/metal3-demo/extra_vars.yml.example"
+        src: "{{ ansible_env.HOME }}/ansible/extra_vars.yml"
         dest: "{{ ansible_env.HOME }}/m3-demo-parent/metal3-demo/extra_vars.yml"
     
     - name: Replace baremetal repo url
