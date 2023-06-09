@@ -5,7 +5,7 @@ If you want to run this do:<br>
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/dbw7/m3-one-click-demo/main/script.sh)"
 ```
 
-Need to be root user on a s3.xlarge.x86 Ubuntu 22.04 Equinix server (only thing I've tested this on)
+Need to be root user on a c2-medium-x86-01 or s3.xlarge.x86 Ubuntu 22.04 LTS Equinix server (only configs I've tested this on so far)
 
 If you don't know what this is, do not run this.
 
