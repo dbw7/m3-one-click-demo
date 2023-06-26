@@ -1,8 +1,13 @@
 # m3-one-click-demo
 
-To run the main version run this command (DO NOT RUN THIS RIGHT NOW):<br>
+Main version without Sylva(DO NOT RUN THIS RIGHT NOW):<br>
 ```
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/dbw7/m3-one-click-demo/main/main-without-sylva/script-main.sh)"
+```
+
+Main version with Sylva (DO NOT RUN THIS RIGHT NOW):<br>
+```
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/dbw7/m3-one-click-demo/main/main-with-sylva/script-main.sh)"
 ```
 
 To run a version made to debug the helm charts without Sylva being deployed, run the following command (DO NOT RUN THIS RIGHT NOW):<br>

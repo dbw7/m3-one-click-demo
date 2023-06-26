@@ -46,3 +46,7 @@ perl -i -pe "s|$SEARCH_STRING|$REPLACE_STRING|" ~/ansible/extra_vars.yml
 
 #Run the playbook with the verbose flag
 ansible-playbook ~/ansible/equinix-playbook.yaml -v
+
+cd ~/m3-demo-parent/metal3-demo/; ./setup_metal3_network_infra.sh -vvv
+
+cd ~/m3-demo-parent/metal3-demo/; ./setup_metal3_core.sh -vvv
