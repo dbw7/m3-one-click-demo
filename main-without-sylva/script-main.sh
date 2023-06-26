@@ -26,10 +26,10 @@ if [ ! -d ~/ansible ]; then
 fi
 
 #put the equinix playbook in the ansible folder
-curl https://raw.githubusercontent.com/dbw7/m3-one-click-demo/main/main/equinix-playbook-main.yaml > ~/ansible/equinix-playbook.yaml
+curl https://raw.githubusercontent.com/dbw7/m3-one-click-demo/main/main-without-sylva/equinix-playbook-main.yaml > ~/ansible/equinix-playbook.yaml
 
 #put the extra vars file in the ansible directory temporarily
-curl https://raw.githubusercontent.com/dbw7/m3-one-click-demo/main/main/extra_vars_main.yml > ~/ansible/extra_vars.yml
+curl https://raw.githubusercontent.com/dbw7/m3-one-click-demo/main/main-without-sylva/extra_vars_main.yml > ~/ansible/extra_vars.yml
 
 #generate ssh key to use to log into the metal-cubed servers
 ssh-keygen -t ed25519 -C "m3-equinix-server" -f ~/.ssh/id_rsa -N ""
