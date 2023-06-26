@@ -1,11 +1,11 @@
 ##
 # Whether to deploy sylva-core
 #
-deploy_sylva_core: true
+deploy_sylva_core: false
 sylva_core_repo_url: https://gitlab.com/codefol/sylva-core.git
 sylva_core_branch: metal3_existing_rancher
-baremetal_repo_url: https://github.com/guangyee/baremetal.git
-baremetal_branch: pvc_for_ironic_only
+baremetal_repo_url: https://github.com/dbw7/charts.git
+baremetal_branch: hardcoded-config
 
 # VM user name
 vm_user: metal
