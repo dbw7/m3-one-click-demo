@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Update package lists
-sudo apt-get update -y
+sudo DEBIAN_FRONTEND=noninteractive apt-get update -y
 
 # Full upgrade
-sudo apt-get dist-upgrade -y
+sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
 
 # Install install pip3
-sudo apt install python3-pip 
+sudo DEBIAN_FRONTEND=noninteractive apt install python3-pip -y
 
 #We install ansible
 python3 -m pip install ansible
