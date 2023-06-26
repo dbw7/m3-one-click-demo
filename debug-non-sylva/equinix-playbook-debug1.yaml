@@ -26,7 +26,7 @@
     
     - name: Clone m3-demo repo
       # shell: git clone https://github.com/suse-edge/metal3-demo
-      shell: git clone https://github.com/dbw7/metal3-demo.git
+      shell: git clone -b debug https://github.com/dbw7/metal3-demo.git
       args:
         chdir: "{{ ansible_env.HOME }}/m3-demo-parent"
       #when: false
@@ -53,7 +53,7 @@
         path: "{{ item }}"
         regexp: '^\s*baremetal_branch:'
         #line: 'baremetal_branch: pvc_for_ironic_only'
-        line: 'baremetal_branch: hardcoded-config'
+        line: 'baremetal_branch: helm-fail'
       loop:
         - "{{ ansible_env.HOME }}/m3-demo-parent/metal3-demo/roles/baremetal/defaults/main.yml"
         - "{{ ansible_env.HOME }}/m3-demo-parent/metal3-demo/roles/dnsmasq/defaults/main.yml"

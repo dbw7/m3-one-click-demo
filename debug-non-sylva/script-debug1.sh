@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Update package lists
-sudo apt-get update -y
+sudo DEBIAN_FRONTEND=noninteractive apt-get update -y
 
 # Full upgrade
-sudo apt-get dist-upgrade -y
+sudo DEBIAN_FRONTEND=noninteractive apt-get dist-upgrade -y
 
 # Install install pip3
-sudo apt install python3-pip 
+sudo DEBIAN_FRONTEND=noninteractive apt install python3-pip -y
 
 #We install ansible
 python3 -m pip install ansible
@@ -46,3 +46,7 @@ perl -i -pe "s|$SEARCH_STRING|$REPLACE_STRING|" ~/ansible/extra_vars.yml
 
 #Run the playbook with the verbose flag
 ansible-playbook ~/ansible/equinix-playbook.yaml -v
+
+cd ~/m3-demo-parent/metal3-demo/; ./setup_metal3_network_infra.sh -vvv
+
+cd ~/m3-demo-parent/metal3-demo/; ./setup_metal3_core.sh -vvv

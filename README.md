@@ -1,21 +1,21 @@
 # m3-one-click-demo
-
-Main version without Sylva(DO NOT RUN THIS RIGHT NOW):<br>
+## 1, 2, and 3 all deploy the metal3-demo with different configurations, only run one of them, not all three
+1. Main version without Sylva(This should be working):<br>
 ```
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/dbw7/m3-one-click-demo/main/main-without-sylva/script-main.sh)"
 ```
 
-Main version with Sylva (DO NOT RUN THIS RIGHT NOW):<br>
+2. Main version with Sylva (This should be working):<br>
 ```
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/dbw7/m3-one-click-demo/main/main-with-sylva/script-main.sh)"
 ```
 
-To run a version made to debug the helm charts without Sylva being deployed, run the following command (DO NOT RUN THIS RIGHT NOW):<br>
+3. To run a version made to debug the helm charts without Sylva being deployed, run the following command:<br>
 ```
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/dbw7/m3-one-click-demo/main/debug-non-sylva/script-debug1.sh)"
 ```
 
-Need to be root user on a c2-medium-x86-01, c3-medium-x86-01 or s3.xlarge.x86 Ubuntu 22.04 LTS Equinix server (only configs I've tested this on so far)
+Need to be root user on a m3-small-x86-01, c2-medium-x86-01, c3-medium-x86-01 or s3.xlarge.x86 Ubuntu 22.04 LTS Equinix server (only configs I've tested this on so far)
 
 If you don't know what this is, do not run this.
 
