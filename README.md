@@ -2,7 +2,7 @@
 
 To run the main version run this command (DO NOT RUN THIS RIGHT NOW):<br>
 ```
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/dbw7/m3-one-click-demo/main/main/script.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/dbw7/m3-one-click-demo/main/main/script-main.sh)"
 ```
 
 To run a version made to debug the helm charts without Sylva being deployed, run the following command (DO NOT RUN THIS RIGHT NOW):<br>
