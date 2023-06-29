@@ -52,7 +52,7 @@
         path: "{{ item }}"
         regexp: '^\s*baremetal_branch:'
         #line: 'baremetal_branch: pvc_for_ironic_only'
-        line: 'baremetal_branch: main'
+        line: 'baremetal_branch: hardcoded-config'
       loop:
         - "{{ ansible_env.HOME }}/m3-demo-parent/metal3-demo/roles/baremetal/defaults/main.yml"
         - "{{ ansible_env.HOME }}/m3-demo-parent/metal3-demo/roles/dnsmasq/defaults/main.yml"
