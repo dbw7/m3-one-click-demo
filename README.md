@@ -17,7 +17,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/dbw7/m3-one-click-demo/m
 
 4. Main version connected to main repo (IN TESTING, DO NOT RUN):<br>
 ```
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/dbw7/m3-one-click-demo/main/suse-edge-main/script-debug1.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/dbw7/m3-one-click-demo/main/suse-edge-main/script-main.sh)"
 ```
 
 Need to be root user on a m3-small-x86-01, c2-medium-x86-01, c3-medium-x86-01 or s3.xlarge.x86 Ubuntu 22.04 LTS Equinix server (only configs I've tested this on so far)
