@@ -170,6 +170,12 @@ SUSHY_EMULATOR_VMEDIA_DEVICES = {
 }
 EOF
 
+# Need this line added to /etc/hosts for sushy-tools to work properly
+LINE="192.168.124.99 boot.ironic.suse.baremetal api.ironic.suse.baremetal inspector.ironic.suse.baremetal"
+FILE="/etc/hosts"
+grep -qF "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
+
+
 htpasswd -b -B -c auth.conf foo foo
 
 openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 365 --noenc -subj "/C=/ST=/L=/O=/OU=/CN="

@@ -4,11 +4,6 @@
   gather_facts: False
   tasks:
     
-    # For this to work properly, this stuff needs to be added to /etc/hosts
-    - name: Add to /etc/hosts
-      lineinfile:
-        dest: /etc/hosts
-        line: "192.168.124.99 boot.ironic.suse.baremetal api.ironic.suse.baremetal inspector.ironic.suse.baremetal"
       
     - name: Add new host
       delegate_to: localhost
