@@ -24,7 +24,7 @@ fi
 
 sudo mkdir /root/vbmc
 sudo cp SLE-Micro.x86_64-5.4.0-Default-GM.raw.xz /root/vbmc
-cd /root/vbmc
+#cd /root/vbmc
 
 # SLE-Micro requires your email and registration code, this can be generated through your account
 
