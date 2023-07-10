@@ -20,6 +20,11 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/dbw7/m3-one-click-demo/m
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/dbw7/m3-one-click-demo/main/suse-edge-main/script-main.sh)"
 ```
 
+VBMC stuff (This assumes that you have a full metal3 demo environment running exactly how the scripts set it up)
+```
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/dbw7/m3-one-click-demo/main/vbmc/vm.sh)"
+```
+
 Need to be root user on a m3-small-x86-01, c2-medium-x86-01, c3-medium-x86-01 or s3.xlarge.x86 Ubuntu 22.04 LTS Equinix server (only configs I've tested this on so far)
 
 If you don't know what this is, do not run this.
