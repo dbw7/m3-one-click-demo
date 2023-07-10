@@ -22,9 +22,9 @@ if [[ ! -f SLE-Micro.x86_64-5.4.0-Default-GM.raw.xz ]]; then
     exit
 fi
 
-mkdir vbmc
-cp SLE-Micro.x86_64-5.4.0-Default-GM.raw.xz /vbmc
-cd vbmc
+mkdir ~/vbmc
+cp SLE-Micro.x86_64-5.4.0-Default-GM.raw.xz ~/vbmc
+cd ~/vbmc
 
 # SLE-Micro requires your email and registration code, this can be generated through your account
 
