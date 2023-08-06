@@ -44,3 +44,8 @@ echo 'alias onehost="sudo ssh-keygen -R 192.168.125.100 -f /root/.ssh/known_host
 echo 'alias twohost="sudo ssh-keygen -R 192.168.125.99 -f /root/.ssh/known_hosts"' >> ~/.bashrc
 source ~/.bashrc
 ```
+
+```
+ssh-keygen -t ed25519 -C "m3-equinix-server" -f ~/.ssh/id_rsa -N ""
+cat ~/.ssh/id_rsa.pub
+```
