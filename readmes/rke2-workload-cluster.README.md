@@ -5,7 +5,8 @@
 This is a step by step guide on deploying RKE2 workload clusters on the SUSE Metal<sup>3</sup> Demo environment
 
 ### Pre-requisites
-A fully function Metal<sup>3</sup> deployment and at least 2 virtual bare metal hosts
+- A fully functioning Metal<sup>3</sup> deployment
+- At least 2 virtual bare metal hosts
 
 ## Deploying the Workload Cluster
 

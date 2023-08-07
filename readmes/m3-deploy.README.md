@@ -28,16 +28,16 @@ Metal<sup>3</sup> (Metal-Kubed) is an open source tool that provides components 
   ```
   ```
   python3 -m pip install ansible
-  sudo apt install libvirt-clients
-  sudo apt install qemu-kvm
-  sudo apt install libvirt-daemon-system
-  sudo apt install pkg-config
-  sudo apt install libvirt-dev
-  sudo apt install mkisofs
-  sudo apt install qemu
-  sudo apt install virtinst
-  sudo apt install qemu-efi
-  sudo apt install sshpass
+  sudo apt install libvirt-clients -y
+  sudo apt install qemu-kvm -y
+  sudo apt install libvirt-daemon-system -y
+  sudo apt install pkg-config -y
+  sudo apt install libvirt-dev -y
+  sudo apt install mkisofs -y
+  sudo apt install qemu -y
+  sudo apt install virtinst -y
+  sudo apt install qemu-efi -y
+  sudo apt install sshpass -y
   pip3 install libvirt-python
   ```
   </details>
@@ -189,8 +189,8 @@ storage:
 </details>
 <br>
 
-5. Define virsh network egress and provisioning (only if you've completed step 4)
-   - Cd into the libvirt directory within the metal3-demo that was cloned earlier 
+5. Define virsh egress and provisioning networks (This configuration is specific to step 4)
+   - CD into the libvirt directory within the metal3-demo that was cloned earlier 
    - Define and start the networks
    ```
    virsh net-define egress.xml; virsh net-start egress
@@ -198,24 +198,25 @@ storage:
    ```
 
 6. Install the ansible-galaxy requirements
-   - Cd into the metal3-demo directory
-   - Install the requirements
+   - CD into the metal3-demo directory and install ansible requirements
    ```
    ansible-galaxy collection install -r requirements.yml
    ```
    
 7. Create the Network Infra VM
-  - CD back into main directory of the repository
-  - Execute the script
+  - In the main directory of the repository, execute the script to create the network-infra VM
   ```
   ./setup_metal3_network_infra.sh
   ```
+  - You may pass `-vvv` at the end of the script to see the output of the script
+  - The network-infra script must have completed without any errors before creating the core VM in step 8
   
 8. Create the core VM
   ```
   ./setup_metal3_core.sh
   ```
+  - You may pass `-vvv` at the end of the script to see the output
 
-9. Log into either VM (These IPs assume you run the previously defined virsh network)
+9. Assuming you are using the networks defined in the `libvirt` directory, you can ssh into each of the VMs using the IPs below
   - Core VM Running Metal3: `ssh metal@192.168.125.99`
   - Network Infra VM Running with public internet access: `ssh metal@192.168.125.100`
