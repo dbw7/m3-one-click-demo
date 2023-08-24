@@ -54,6 +54,8 @@ cp extra_vars.yml.example extra_vars.yml
 ```
 
 3. Follow the instructions within extra_vars.yml to configure it according to your needs. If you would like a pre-configured file, skip to step 4, otherwise, skip to step 6. 
+- Important note: There are hardcoded memory and cpu configurations within `playbooks/setup_metal3_core.yaml` and `roles/vm/defaults/main.yaml` that are fairly intensive. You can decrease these resources to fit your environment, but do note that if the resources are too little, you may run into unexpected issues.
+- The lowest resource configuration that is confirmed to work is: 6 VCPUs and 16000 vm_memory in `playbooks/setup_metal3_core.yaml` and 8000 vm_memory in `roles/vm/defaults/main.yaml`.
 
 4. Show Pre-configured extra_vars.yml.
 <details>
