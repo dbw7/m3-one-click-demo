@@ -25,7 +25,7 @@ sudo qemu-img create -f qcow2 /var/lib/libvirt/images/node2.qcow2 30G
 ```
 - This is so that one virtual machine acts as a control plane and another as a worker node. You can add as many worker nodes as you wish.
 
-Install Depedencies
+Install Dependencies
 ```
 sudo apt install apache2-utils -y
 sudo pip install sushy-tools
@@ -35,9 +35,9 @@ sudo DEBIAN_FRONTEND=noninteractive apt install podman -y
 
 Create Virtual Machines using Virt
 ```
-virt-install --name node-1 --memory 4096 --vcpus 2 --disk /var/lib/libvirt/images/node1.qcow2 --network bridge=m3-prov,model=virtio --osinfo detect=on --console pty,target_type=virtio --noautoconsole --graphics vnc --boot nvram.template=/usr/share/OVMF/OVMF_VARS.fd --boot loader=/usr/share/OVMF/OVMF_CODE.secboot.fd --boot loader.secure=no --boot loader.type=pflash --boot loader.readonly=yes --debug -v --machine pc-q35-5.1 --noautoconsole
+virt-install --name node-1 --memory 4096 --vcpus 2 --disk /var/lib/libvirt/images/node1.qcow2 --network bridge=m3-prov,model=virtio --osinfo detect=on --console pty,target_type=virtio --noautoconsole --graphics vnc --boot nvram.template=/usr/share/OVMF/OVMF_VARS.fd --boot loader=/usr/share/OVMF/OVMF_CODE.secboot.fd --boot loader.secure=no --boot loader.type=pflash --boot loader.readonly=yes --debug -v --machine pc-q35-5.1
 
-virt-install --name node-2 --memory 4096 --vcpus 2 --disk /var/lib/libvirt/images/node2.qcow2 --network bridge=m3-prov,model=virtio --osinfo detect=on --console pty,target_type=virtio --noautoconsole --graphics vnc --boot nvram.template=/usr/share/OVMF/OVMF_VARS.fd --boot loader=/usr/share/OVMF/OVMF_CODE.secboot.fd --boot loader.secure=no --boot loader.type=pflash --boot loader.readonly=yes --debug -v --machine pc-q35-5.1 --noautoconsole
+virt-install --name node-2 --memory 4096 --vcpus 2 --disk /var/lib/libvirt/images/node2.qcow2 --network bridge=m3-prov,model=virtio --osinfo detect=on --console pty,target_type=virtio --noautoconsole --graphics vnc --boot nvram.template=/usr/share/OVMF/OVMF_VARS.fd --boot loader=/usr/share/OVMF/OVMF_CODE.secboot.fd --boot loader.secure=no --boot loader.type=pflash --boot loader.readonly=yes --debug -v --machine pc-q35-5.1
 
 ```
 - This assumes you will be running 1 control plane and 1 worker node.
@@ -102,6 +102,7 @@ Save the IP Address of the machine in a variable
 ```
 IP_ADDR=$(ifconfig | grep "bond0: " -A 1 | awk '/inet / {print $2}')
 ```
+- This grep command is specific to the network configuration typically found on an Equinix server, on other environments you will need to manually add your ip address to the `IP_ADDR` variable for future commands.
 
 Grab the mac addresses and Sushy-Tools IDs of the virtual machines and save in variables
 ```
@@ -112,6 +113,7 @@ NODE1MAC=$(sudo virsh dumpxml node-1 | grep 'mac address' | grep -ioE "([0-9A-Fa
 NODE2MAC=$(sudo virsh dumpxml node-2 | grep 'mac address' | grep -ioE "([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}")
 ```
 - The first 2 commands grab the UUID's from Sushy-Tools, the second two commands grab the mac addresses from virsh.
+- If your VMs aren't defined in root's virsh, you may need to remove "sudo" from the NODE1MAC virsh commands.
 
 
 Create the BMH yamls using the virtual machine information
@@ -209,6 +211,7 @@ Apply The new configmap.
 kubectl apply -f output.yaml
 ```
 - The above lines have been added so that ironic is able to log into the VMs for provisioning with no issue.
+- If the apply command doesn't work immediately, re-get the ironic config map and perform each sed command separately, then reapply the yaml.
 
 Restart Ironic Pod to make sure changes are active.
 ```
@@ -216,6 +219,7 @@ IRONIC_POD=$(kubectl get pods -n metal-cubed | grep -o -E 'heavy-metal-metal3-ir
 kubectl delete pod $IRONIC_POD -n metal-cubed
 ```
 - Wait for Ironic to restart, this may take a minute or so.
+- These two commands that restart ironic are specific to the names of ironic containers without Sylva enabled, if Sylva is enabled, I recommend going into K9S, manually searching for the ironic container inside of the `metal3-system` namespace and deleting it with `CTRL+k`
 
 Apply the bare metal node YAML files
 ```
